@@ -9,7 +9,6 @@ import os
 
 # Modo debug ativo — nunca deve ir para produção
 DEBUG = True
-
 # Chave secreta da aplicação Flask, gravada diretamente no código-fonte
 #SECRET_KEY = "banco_cartoes_2024_secret"
 SECRET_KEY = os.getenv("SECRET_KEY")
