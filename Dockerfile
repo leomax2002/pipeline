@@ -15,6 +15,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 RUN apt update \
+        && apt install gcc \ 
         && apt upgrade -y \
         && pip install --no-cache-dir -r requirements.txt \
         && apt  clean \
