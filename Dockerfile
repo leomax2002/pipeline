@@ -8,14 +8,14 @@
 # O código da aplicação, propositalmente, continua com as
 # vulnerabilidades estudadas nos laboratórios de SonarQube e Semgrep.
 
-FROM python:3.15.0rc2-slim-trixie
+FROM python:3.12-slim
 
 WORKDIR /app
 
 COPY requirements.txt .
 
 RUN apt update \
-        && apt install gcc \ 
+        && apt install gcc -y \ 
         && apt upgrade -y \
         && pip install --no-cache-dir -r requirements.txt \
         && apt  clean \
