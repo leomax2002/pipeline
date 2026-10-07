@@ -60,7 +60,7 @@ jobs:
             --config=p/owasp-top-ten \
             --config=p/security-audit \
             --config=p/secrets \
-            --json --output=semgrep-results.json 
+            --json --output=semgrep-results.json
 
       - name: Avaliar a politica de portao (bloqueia so em ERROR)
         run: |
@@ -230,17 +230,17 @@ jobs:
             sleep 3
           done
 
-       - name: Rodar o OWASP ZAP (baseline scan)
-         run: |
-           mkdir -p zap-report && chmod 777 zap-report
-           docker run --rm --network host \
-             -v $(pwd)/zap-report:/zap/wrk/:rw \
-             -v $(pwd)/.zap/rules.tsv:/zap/rules.tsv:ro \
-             ghcr.io/zaproxy/zaproxy:stable \
-             zap-baseline.py -t http://localhost:5000 \
+      - name: Rodar o OWASP ZAP (baseline scan)
+        run: |
+          mkdir -p zap-report && chmod 777 zap-report
+          docker run --rm --network host \
+            -v $(pwd)/zap-report:/zap/wrk/:rw \
+            -v $(pwd)/.zap/rules.tsv:/zap/rules.tsv:ro \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t http://localhost:5000 \
               -r zap-report.html -J zap-report.json \
               -c /zap/rules.tsv -I
-         continue-on-error: true
+        continue-on-error: true
 
       - name: Avaliar a politica de portao do DAST (bloqueia em risco ALTO)
         run: |
@@ -310,4 +310,3 @@ jobs:
         run: |
           echo "Aqui entraria a chamada ao seu webhook de notificacao."
           echo 'curl -X POST -H "Content-type: application/json" --data "{\"text\":\"Pipeline falhou\"}" $SLACK_WEBHOOK_URL'
- 
