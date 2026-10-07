@@ -230,7 +230,7 @@ jobs:
             sleep 3
           done
 
-      - name: Rodar o OWASP ZAP (baseline scan)
+- name: Rodar o OWASP ZAP (baseline scan)
         run: |
           mkdir -p zap-report && chmod 777 zap-report
           docker run --rm --network host \
